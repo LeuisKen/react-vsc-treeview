@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build React Vsc Treeview",
+            "type": "npm",
+            "script": "compile",
+            "problemMatcher": "$tsc",
+            "path": "packages/react-vsc-treeview/",
+            "group": "build"
+        },
+        {
+            "label": "Watch React Vsc Treeview",
+            "type": "npm",
+            "script": "watch",
+            "problemMatcher": "$tsc-watch",
+            "path": "packages/react-vsc-treeview/",
+            "group": "build"
+        },
+        {
+            "label": "Watch Example Extension",
+            "type": "npm",
+            "script": "watch",
+            "path": "example/",
+            "group": "build",
+            "isBackground": true,
+            "problemMatcher": [
+                "$ts-webpack-watch",
+                "$tslint-webpack-watch"
+            ],
+            "dependsOn": ["Build React Vsc Treeview"]
+        }
+    ]
+}

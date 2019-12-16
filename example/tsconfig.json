@@ -1,0 +1,18 @@
+{
+    "extends": "../shared.tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/**/*",
+    ],
+    "references": [
+        {"path": "../packages/react-vsc-treeview"}
+    ]
+}

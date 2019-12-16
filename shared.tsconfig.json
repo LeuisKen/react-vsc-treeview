@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "baseUrl":".",
+        "target": "es6",
+        "strict": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "es6",
+            "es2017.object"
+        ],
+        "paths": {
+            "@utils": ["./@utils"]
+        },
+        "declaration": true,
+        "declarationMap": true,
+        "composite": true
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "name": "react-vsc-treeview-example",
+    "displayName": "React VSC TreeView Example",
+    "description": "An example extension that shows how to use react vsc treeview",
+    "publisher": "baidu",
+    "version": "0.0.1",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.41.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./dist/extension.js",
+    "contributes": {
+        "views": {
+            "test": [
+                {
+                    "id": "baidu.tree.example",
+                    "name": "用户面板"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "clean": "rimraf dist/",
+        "compile": "yarn run clean && webpack --mode production --info-verbosity verbose",
+        "watch": "yarn run clean && webpack --mode none --watch --info-verbosity verbose"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.16",
+        "rimraf": "^3.0.0",
+        "ts-loader": "^6.2.1",
+        "typescript": "^3.7.2",
+        "vscode": "^1.1.36",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10"
+    },
+    "dependencies": {
+        "react": "^16.12.0",
+        "react-vsc-treeview": "*"
+    }
+}
