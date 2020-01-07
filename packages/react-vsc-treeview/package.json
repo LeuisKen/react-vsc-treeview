@@ -6,7 +6,8 @@
     "scripts": {
         "clean": "rimraf ./dist tsconfig.tsbuildinfo",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./"
+        "watch": "tsc -watch -p ./",
+        "prepublishOnly": "npm run compile"
     },
     "dependencies": {
         "react": "^16.12.0",

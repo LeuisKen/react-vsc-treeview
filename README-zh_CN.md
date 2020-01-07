@@ -141,7 +141,7 @@ const App = () => {
     useEffect(() => {
         getUser().then((res) => {
             setUser(res);
-        })
+        });
     }, []);
     if (user === null) {
         return <TreeItem label="Loading..." />;
