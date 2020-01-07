@@ -4,7 +4,7 @@ export function getUser() {
             resolve({
                 username: 'John',
                 email: 'john@example.com',
-                collection: ['one', 'two', 'three']
+                collection: ['Add', 'Update', 'Delete']
             });
         }, 1000);
     });

@@ -21,7 +21,7 @@ const App = () => {
         <>
             <TreeItem label={user.username}></TreeItem>
             <TreeItem label={user.email}></TreeItem>
-            <TreeItem label="collection">
+            <TreeItem label="Operation">
                 {
                     user.collection.map((item) => (
                         <TreeItem key={item} label={item}></TreeItem>
