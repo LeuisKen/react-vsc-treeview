@@ -4,7 +4,7 @@
  */
 
 import * as vscode from 'vscode';
-import {TreeItemProps} from './ReactTreeItem';
+import {UpdatedPayload} from './ReactTreeItem';
 
 export default class ExtendedTreeItem {
 
@@ -34,9 +34,9 @@ export default class ExtendedTreeItem {
         this._onDidChange.fire(this);
     }
 
-    update(props: TreeItemProps) {
-        if (props.label) {
-            this.value.label = props.label;
+    update(props: UpdatedPayload[]) {
+        for (let payload of props) {
+            this.value[payload.type] = payload.value;
         }
     }
 }

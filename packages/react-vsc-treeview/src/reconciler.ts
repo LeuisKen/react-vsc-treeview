@@ -2,11 +2,11 @@ import * as vscode from 'vscode';
 import ReactReconciler from 'react-reconciler';
 import ExtendedTreeDataProvider from './ExtendedTreeDataProvider';
 import ExtendedTreeItem from './ExtendedTreeItem';
-import {TreeItemProps} from './ReactTreeItem';
+import {Props, propKeys, UpdatedPayload} from './ReactTreeItem';
 
 export default ReactReconciler<
-    'div', TreeItemProps, ExtendedTreeDataProvider, ExtendedTreeItem, ExtendedTreeItem,
-    unknown, unknown, unknown, UpdatedPayload, unknown, unknown, unknown
+    'div', Props, ExtendedTreeDataProvider, ExtendedTreeItem, ExtendedTreeItem,
+    unknown, unknown, unknown, UpdatedPayload[], unknown, unknown, unknown
 >({
     supportsMutation: true,
 
@@ -51,11 +51,17 @@ export default ReactReconciler<
         parentInstance.insertBefore(child, beforeChild);
     },
 
-    prepareUpdate(_instance, _type, oldProps, newProps, _rootContainerInstance) {
-        if (oldProps.label !== newProps.label) {
-            return {label: newProps.label || ''};
+    prepareUpdate(_instance, _type, oldProps, newProps) {
+        let res: UpdatedPayload[] = [];
+        for (let key of propKeys) {
+            if (oldProps[key] !== newProps[key]) {
+                res.push({
+                    type: key,
+                    value: newProps[key]
+                });
+            }
         }
-        return null;
+        return res;
     },
     commitUpdate(instance, updatePayload) {
         instance.update(updatePayload);
@@ -73,7 +79,3 @@ export default ReactReconciler<
         return false;
     }
 });
-
-interface UpdatedPayload {
-    label: string
-}
