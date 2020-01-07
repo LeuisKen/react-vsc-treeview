@@ -16,7 +16,7 @@ VS Code 为用户编写 TreeView 提供了递归式的 API，即：
 
 用于获取实际渲染的 TreeItem 实例。
 
-这种 API 非常适合文件树的场景（例如 ftp 文件浏览插件、github 文件浏览插件）：不知道每一层有多少个节点，也不知道有多少层。其基本使用形式如下（代码来自 [vscode-github-explorer](https://github.com/LeuisKen/vscode-github-explorer/blob/master/src/view/fileTreeDataProvider.ts#L12) ）：
+这种 API 非常适合文件树的场景（例如 ftp 文件浏览插件、github 文件浏览插件）：不知道每一层有多少个节点，也不知道有多少层，并且对懒加载的支持也非常好。其基本使用形式如下（代码来自 [vscode-github-explorer](https://github.com/LeuisKen/vscode-github-explorer/blob/master/src/view/fileTreeDataProvider.ts#L12) ）：
 
 ```ts
 class FileTreeView
@@ -48,11 +48,47 @@ class FileTreeView
 }
 ```
 
-但是我们在使用过程中，会去创建的常常不止是文件树，也包括了比较常见的菜单——虽然可能不知道每层有多少个节点，但是我们知道一共有多少层。用前端更为熟悉的 HTML 语言声明式的编写一个这样的 TreeView 是非常简单的。如下：
+不过，我们在使用这一 API 开发业务的过程中，会去创建的常常不止是文件树，也包括了比较常见的菜单——虽然可能不知道每层有多少个节点，但是我们知道一共有多少层，懒加载也并不总是那么必要。这种情况下，用前端更为熟悉的类 HTML 语法声明式的编写一个这样的 TreeView 是非常简单的。对于如下图的 TreeView，相信大家都能很直观的想到如何用 HTML 描述：
 
 ![SimpleMenuTree](/assets/SimpleMenuTree.png)
 
-但是用 VS Code TreeView 的递归式 API，去表示这种声明式更擅长的树状结构，代码就会稍显得有些冗余，不够清晰。
+```html
+<div>
+    <div>John</div>
+    <div>john@example.com</div>
+    <div>
+        <div>Operation</div>
+        <div>
+            <div>Add</div>
+            <div>Update</div>
+            <div>Delete</div>
+        </div>
+    </div>
+</div>
+```
+
+而如果使用 VS Code TreeView 的递归式 API，去表示这种声明式更擅长的树状结构，代码就会稍显得有些冗余，不够清晰。
+
+```ts
+class SimpleTreeView
+    implements vscode.TreeDataProvider<Node> {
+
+    private disposables: vscode.Disposable[] = [];
+
+    // getChildren 无法直观的展示数据间存在的父子关系
+    // 当然你可以借助数据结构和循环来优化下面的代码
+    // 但我们更希望找到更为通用的解决方案，并且尽量复用我们已有的知识
+    async getChildren(node?: Node) {
+        if (node === null) {
+            return ['John', 'john@example.com', 'Operation'];
+        }
+        else if (node === 'Operation') {
+            return ['Add', 'Update', 'Delete'];
+        }
+        return [];
+    }
+}
+```
 
 为了能够更加清晰高效地解决类似“菜单”这样：我们知道有多少层，并且为每层赋予了确切含义的树状视图的开发问题，我们决定使用 React 做为视图描述方式。因此开发了本代码库。
 
@@ -173,7 +209,7 @@ export interface TreeItemProps {
 }
 ```
 
-接下来，就请愉快的使用 React 吧，推荐使用 React hooks API。
+接下来，就请愉快的使用你所熟悉的 React 吧，推荐使用 React hooks API。
 
 ## 感谢
 
