@@ -48,23 +48,17 @@ class FileTreeView
 }
 ```
 
-不过，我们在使用这一 API 开发业务的过程中，会去创建的常常不止是文件树，也包括了比较常见的菜单——虽然可能不知道每层有多少个节点，但是我们知道一共有多少层，懒加载也并不总是那么必要。这种情况下，用前端更为熟悉的类 HTML 语法声明式的编写一个这样的 TreeView 是非常简单的。对于如下图的 TreeView，相信大家都能很直观的想到如何用 HTML 描述：
+不过，我们在使用这一 API 开发业务的过程中，会去创建的常常不止是文件树，也包括了比较常见的菜单——虽然可能不知道每层有多少个节点，但是我们知道一共有多少层，懒加载也并不总是那么必要。这种情况下，用前端更为熟悉的类 HTML 语法声明式的编写一个这样的 TreeView 是非常简单的。对于如下图的 TreeView，相信大家都能很直观的想到如何用 HTML 描述（这里为了简洁采用 markdown 描述）：
 
 ![SimpleMenuTree](/assets/SimpleMenuTree.png)
 
 ```html
-<div>
-    <div>John</div>
-    <div>john@example.com</div>
-    <div>
-        <div>Operation</div>
-        <div>
-            <div>Add</div>
-            <div>Update</div>
-            <div>Delete</div>
-        </div>
-    </div>
-</div>
+- John
+- john@example.com
+- Operation
+    - Add
+    - Update
+    - Delete
 ```
 
 而如果使用 VS Code TreeView 的递归式 API，去表示这种声明式更擅长的树状结构，代码就会稍显得有些冗余，不够清晰。
