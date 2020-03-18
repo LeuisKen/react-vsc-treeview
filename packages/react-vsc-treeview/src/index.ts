@@ -6,7 +6,6 @@
 import * as vscode from 'vscode';
 import ExtendedTreeDataProvider from './ExtendedTreeDataProvider';
 import reconciler from './reconciler';
-import ReactTreeItem from './ReactTreeItem';
 
 const ReactTreeView = {
     render(whatToRender, viewId) {
@@ -20,6 +19,6 @@ const ReactTreeView = {
     }
 };
 
-export const TreeItem = ReactTreeItem;
-
+export {default as TreeItem} from './ReactTreeItem';
+export {default as ExtendedTreeItem} from './ExtendedTreeItem';
 export default ReactTreeView;

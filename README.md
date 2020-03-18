@@ -200,6 +200,7 @@ export interface TreeItemProps {
     tooltip?: string | undefined;
     command?: string | vscode.Command;
     contextValue?: string;
+    expanded?: boolean;
 }
 ```
 
