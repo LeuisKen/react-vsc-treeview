@@ -14,7 +14,8 @@ export default class ExtendedTreeDataProvider implements vscode.TreeDataProvider
     readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
     getChildren(element?: ExtendedTreeItem) {
-        return element ? element.children : this._data.children;
+        const children = element ? element.children : this._data.children;
+        return children;
     }
 
     getParent(element: ExtendedTreeItem) {

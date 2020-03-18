@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import ReactReconciler from 'react-reconciler';
 import ExtendedTreeDataProvider from './ExtendedTreeDataProvider';
 import ExtendedTreeItem from './ExtendedTreeItem';
-import {Props, propKeys, UpdatePayload} from './ReactTreeItem';
+import {Props, propKeys, UpdatePayload} from './VSCTreeItem';
 
 export default ReactReconciler<
     'div', Props, ExtendedTreeDataProvider, ExtendedTreeItem, ExtendedTreeItem,
@@ -19,26 +19,16 @@ export default ReactReconciler<
             resourceUri,
             tooltip,
             command,
-            contextValue,
-            expanded,
-            children
+            collapsibleState,
+            contextValue
         } = props;
-        const collapsibleState = children == null
-            ? vscode.TreeItemCollapsibleState.None
-            : expanded === true
-            ? vscode.TreeItemCollapsibleState.Expanded
-            : vscode.TreeItemCollapsibleState.Collapsed;
         const treeItem = new vscode.TreeItem(label, collapsibleState);
         treeItem.id = id;
         treeItem.iconPath = iconPath;
         treeItem.description = description;
         treeItem.resourceUri = resourceUri;
         treeItem.tooltip = tooltip;
-        if (command) {
-            treeItem.command = typeof command === 'string'
-                ? treeItem.command = {command, title: ''}
-                : treeItem.command = command;
-        }
+        treeItem.command = command;
         treeItem.contextValue = contextValue;
         return container.createTreeItem(treeItem);
     },
@@ -59,6 +49,7 @@ export default ReactReconciler<
     removeChild(parentInstance, child) {
         parentInstance.removeChild(child);
     },
+
     insertInContainerBefore(container, child, beforeChild) {
         container.insertInRootBefore(child, beforeChild);
     },

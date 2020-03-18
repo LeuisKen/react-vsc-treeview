@@ -4,7 +4,7 @@
  */
 
 import * as vscode from 'vscode';
-import {UpdatePayload} from './ReactTreeItem';
+import {UpdatePayload} from './VSCTreeItem';
 
 export default class ExtendedTreeItem {
 
@@ -35,30 +35,8 @@ export default class ExtendedTreeItem {
     }
 
     update(props: UpdatePayload[]) {
-        for (const payload of props) {
-            switch (payload.type) {
-                case 'command':
-                    const command = (payload as UpdatePayload<'command'>).value;
-                    this.value.command = typeof command === 'string'
-                        ? this.value.command = {command, title: ''}
-                        : this.value.command = command;
-                    break;
-                case 'expanded':
-                    const lastCollapsibleState = this.value.collapsibleState;
-                    if (lastCollapsibleState === vscode.TreeItemCollapsibleState.None) {
-                        break;
-                    }
-                    const expanded = (payload as UpdatePayload<'expanded'>).value;
-                    const targetCollapsibleState = expanded === true
-                        ? vscode.TreeItemCollapsibleState.Expanded
-                        : vscode.TreeItemCollapsibleState.Collapsed;
-                    if (lastCollapsibleState !== targetCollapsibleState) {
-                        this.value.collapsibleState = targetCollapsibleState;
-                    }
-                    break;
-                default:
-                    this.value[payload.type] = payload.value;
-            }
-        }
+        props.forEach((payload) => {
+            this.value[payload.type] = payload.value;
+        });
     }
 }

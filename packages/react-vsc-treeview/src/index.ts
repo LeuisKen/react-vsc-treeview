@@ -19,6 +19,6 @@ const ReactTreeView = {
     }
 };
 
-export {default as TreeItem} from './ReactTreeItem';
+export {default as TreeItem} from './TreeItem';
 export {default as ExtendedTreeItem} from './ExtendedTreeItem';
 export default ReactTreeView;
