@@ -35,10 +35,10 @@ const TreeItem: React.FC<TreeItemProps> = ({
     const command = useMemo(
         () => {
             if (!rawCommand) {
-                return null;
+                return undefined;
             }
             return typeof rawCommand === 'string'
-                ? {command, title: ''}
+                ? {command: rawCommand, title: ''}
                 : rawCommand;
         },
         [rawCommand]

@@ -10,7 +10,7 @@ export default class ExtendedTreeDataProvider implements vscode.TreeDataProvider
 
     private _data: {children: ExtendedTreeItem[]} = {children: []};
 
-    private _onDidChangeTreeData = new vscode.EventEmitter<ExtendedTreeItem>();
+    private _onDidChangeTreeData = new vscode.EventEmitter<ExtendedTreeItem | undefined | null | void>();
     readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
 
     getChildren(element?: ExtendedTreeItem) {

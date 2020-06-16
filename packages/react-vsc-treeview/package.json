@@ -1,6 +1,6 @@
 {
     "name": "react-vsc-treeview",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "main": "dist/index.js",
     "license": "MIT",
     "scripts": {
@@ -11,12 +11,12 @@
     },
     "dependencies": {
         "react": "^16.13.0",
-        "react-reconciler": "^0.25.0",
-        "vscode": "^1.1.36"
+        "react-reconciler": "^0.25.0"
     },
     "devDependencies": {
         "@types/react": "^16.9.23",
         "@types/react-reconciler": "^0.18.0",
+        "@types/vscode": "^1.41.0",
         "typescript": "^3.8.3"
     }
 }

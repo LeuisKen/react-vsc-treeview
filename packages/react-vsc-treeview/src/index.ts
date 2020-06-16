@@ -14,7 +14,7 @@ const ReactTreeView = {
             treeDataProvider
         });
         const container = reconciler.createContainer(treeDataProvider, false, false);
-        reconciler.updateContainer(whatToRender, container, null, null);
+        reconciler.updateContainer(whatToRender, container, null, () => {});
         return treeView;
     }
 };
