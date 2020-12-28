@@ -73,6 +73,8 @@ export default ReactReconciler<
         instance.update(updatePayload);
     },
 
+    clearContainer() {},
+
     // @ts-ignore
     finalizeInitialChildren() {},
     getChildHostContext() {},
