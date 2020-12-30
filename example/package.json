@@ -16,6 +16,40 @@
     ],
     "main": "./dist/extension.js",
     "contributes": {
+        "commands": [
+            {
+                "command": "example.counterIncrease",
+                "title": "Increase Counter",
+                "category": "React VSC TreeView Example",
+                "icon": {
+                    "dark": "./assets/dark/increase.svg",
+                    "light": "./assets/light/increase.svg"
+                }
+            },
+            {
+                "command": "example.counterDecrease",
+                "title": "Decrease Counter",
+                "category": "React VSC TreeView Example",
+                "icon": {
+                    "dark": "./assets/dark/decrease.svg",
+                    "light": "./assets/light/decrease.svg"
+                }
+            }
+        ],
+        "menus": {
+            "view/item/context": [
+                {
+                    "command": "example.counterIncrease",
+                    "group": "inline@1",
+                    "when": "view == baidu.tree.example && viewItem =~ /counterIncrease/"
+                },
+                {
+                    "command": "example.counterDecrease",
+                    "group": "inline@2",
+                    "when": "view == baidu.tree.example && viewItem =~ /counterDecrease/"
+                }
+            ]
+        },
         "views": {
             "test": [
                 {

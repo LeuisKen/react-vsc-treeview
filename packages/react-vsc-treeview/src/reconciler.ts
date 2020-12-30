@@ -73,6 +73,10 @@ export default ReactReconciler<
         instance.update(updatePayload);
     },
 
+    prepareForCommit() {
+        return null;
+    },
+
     clearContainer() {},
 
     // @ts-ignore
@@ -80,7 +84,6 @@ export default ReactReconciler<
     getChildHostContext() {},
     getPublicInstance() {},
     getRootHostContext() {},
-    prepareForCommit() {},
     resetAfterCommit() {},
 
     shouldSetTextContent() {

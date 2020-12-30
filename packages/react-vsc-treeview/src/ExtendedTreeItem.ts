@@ -38,5 +38,6 @@ export default class ExtendedTreeItem {
         props.forEach((payload) => {
             this.value[payload.type] = payload.value;
         });
+        this._onDidChange.fire(this);
     }
 }
